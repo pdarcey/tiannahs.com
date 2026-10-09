@@ -36,6 +36,8 @@ A static holding page for `tiannahs.com`, hosted on GitHub Pages, with an animat
 - `designs/index.html` — gallery linking all designs
 - `assets/` — shared images (portrait)
 - `index.html` — the live page (the chosen design, promoted)
+- `designs/thumbs/` — still screenshots used by the gallery
+- `_config.yml` — keeps `CLAUDE.md`, `README.md` and `Documentation/` off the live site
 - `Documentation/` — Plan, Status, Journal
 
 ## Conventions
@@ -44,6 +46,9 @@ A static holding page for `tiannahs.com`, hosted on GitHub Pages, with an animat
 - The contact form is a plain HTML POST to Web3Forms, with a `redirect` back to `/#thanks` (CSS `:target` shows the confirmation) and a `botcheck` honeypot field
 - Australian English in copy and docs
 - Clarity project: `tiannahs.com`
+- **iPhone memory limits:** don't use large `filter: blur()`, `backdrop-filter` on phones, animated masks, oversized animated layers, or live `<iframe>` previews. iOS Safari kills the page (white flash, then reload). Use fading `radial-gradient`s and still screenshots instead. Paul checks on his real iPhone before anything is called done.
+- **Gallery thumbnails:** `designs/thumbs/*.webp` are 960×600 WebP screenshots taken at 1440×900. Retake them whenever a design changes.
+- **Deploying** is just `git push` to `main`. GitHub Pages rebuilds in under a minute. Pull first, because GitHub sometimes commits to `main` itself (for example, the `CNAME` file).
 
 ## Environment Variables
 - None. The Web3Forms access key is public by design. Until Tiannah's key exists, use the placeholder `YOUR_WEB3FORMS_ACCESS_KEY`.

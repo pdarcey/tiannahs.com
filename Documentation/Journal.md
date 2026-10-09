@@ -43,6 +43,10 @@ The architecture is about as simple as it gets, and that's deliberate.
 
 - **2026-10-09: The gallery that crashed iPhones (Clarity #508).** On Paul's iPhone, scrolling `/designs/` flashed white, then reloaded at the top. That's iOS Safari's tell-tale sign that the page ran out of memory and was killed. The gallery used live `<iframe>` previews, so it was really running all five animated pages at once. Each page had GPU-hungry effects: a `filter: blur(80px)` on blobs larger than the screen, frosted glass, and a grain layer four times the screen's area. At the iPhone's 3× pixel density, every one of those layers costs tens of megabytes. Desktop browsers shrug it off, so headless Chrome never noticed. The fix was still screenshots in the gallery, plus cheaper effects in the designs themselves: blobs drawn with fading `radial-gradient`s instead of a blur filter (same look, a fraction of the memory), grain sized to the screen, and no frosted glass or animated masks on phones. Lesson: a big blur filter is like asking the GPU to paint a mural through frosted glass, sixty times a second.
 
+- **2026-10-09: Going live, and the certificate that wouldn't come.** The repo went up publicly as `pdarcey/tiannahs.com`. A `_config.yml` keeps `CLAUDE.md` and `Documentation/` off the website, though they're still readable in the repo. Paul pointed the Hover DNS at GitHub, and every resolver agreed within minutes. Then we waited. GitHub just sat there for 45 minutes and never even *requested* an HTTPS certificate. Re-saving the domain did nothing. Removing it and adding it back got the certificate approved within a minute. It's the IT Crowd fix ("have you tried turning it off and on again?"), and it worked. Side effect: GitHub quietly committed "Delete CNAME" and then "Create CNAME" to `main`, so pull before your next push.
+- **2026-10-09: Local DNS is a liar too.** Right after the switch, `curl tiannahs.com` from this Mac returned an empty 404 from Hover's parking server, because macOS still had the old address cached. Testing with `curl --resolve tiannahs.com:80:185.199.108.153` proved GitHub was serving the site perfectly. When "it's broken" and "it works" disagree, check whose DNS you're asking.
+- **2026-10-09: A short detour.** Before moving to GitHub Pages we briefly published the gallery as a private Claude Artifact. Artifacts can't send a form to another site, so that copy needed its forms faked. Once the real domain was live, the Artifact was redundant and was deleted.
+
 ## Engineer's Wisdom
 
 - Fit the tool to the lifespan. A holding page should be cheap to build, cheap to host, and easy to throw away.
@@ -50,4 +54,6 @@ The architecture is about as simple as it gets, and that's deliberate.
 
 ## If I Were Starting Over...
 
-Too early to say. Ask me after launch.
+- **Phone test first, not last.** Every design looked great in desktop Chrome. The first real iPhone scroll crashed the gallery. One phone check before sharing the link would have caught it.
+- **Screenshots in the gallery from day one.** Live iframe previews were clever, but five animated pages at once was always going to be too much.
+- **Point DNS early.** The DNS and certificate dance took longer than building all five designs. Starting it on day one, even with a placeholder page, gives the slow parts time to settle.
