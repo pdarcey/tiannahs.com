@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiannah's — Coming soon</title>
+  <meta name="description" content="Tiannah's — something good is coming to the Gold Coast.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Stencil+Display:wght@700;900&family=IBM+Plex+Sans:wght@400;600&family=Special+Elite&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cobalt: #0047AB;
+      --cerulean: #2A9FD6;
+      --teal: #00A6A6;
+      --paper: #EEEBE3;
+      --ink: #111318;
+      --tape: rgba(42, 159, 214, 0.55);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    html, body { margin: 0; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ---------- Scrolling wordmark rows ---------- */
+    .marquee {
+      position: fixed;
+      inset: -20vh -20vw;
+      z-index: -2;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      transform: rotate(-8deg);
+      pointer-events: none;
+    }
+
+    .row {
+      display: flex;
+      width: max-content;
+      font-family: "Big Shoulders Stencil Display", Impact, sans-serif;
+      font-weight: 900;
+      font-size: clamp(4rem, 11vw, 9rem);
+      line-height: 1;
+      text-transform: uppercase;
+      white-space: nowrap;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(0, 71, 171, 0.14);
+      animation: marquee 90s linear infinite;
+    }
+
+    .row:nth-child(even) { animation-direction: reverse; animation-duration: 110s; -webkit-text-stroke-color: rgba(0, 166, 166, 0.16); }
+    .row:nth-child(3n)   { color: rgba(0, 71, 171, 0.05); }
+
+    .row span { padding-right: 0.4em; }
+
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ---------- Photocopy grain ---------- */
+    .grain {
+      position: fixed;
+      inset: -50%;
+      z-index: 10;
+      pointer-events: none;
+      opacity: 0.13;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: jitter 1.2s steps(4) infinite;
+    }
+
+    @keyframes jitter {
+      0%   { transform: translate(0, 0); }
+      25%  { transform: translate(-3%, 2%); }
+      50%  { transform: translate(2%, -3%); }
+      75%  { transform: translate(-1%, 3%); }
+      100% { transform: translate(3%, -1%); }
+    }
+
+    /* ---------- Layout: a disciplined 12-column grid ---------- */
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem);
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      align-items: start;
+    }
+
+    .header {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: space-between;
+      font-family: "Special Elite", monospace;
+      font-size: 0.85rem;
+      border-top: 3px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
+      padding: 0.4rem 0;
+    }
+
+    h1 {
+      grid-column: 1 / -1;
+      font-family: "Big Shoulders Stencil Display", Impact, sans-serif;
+      font-weight: 900;
+      font-size: clamp(5rem, 19vw, 15rem);
+      line-height: 0.8;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    h1 span { color: var(--cobalt); }
+
+    /* ---------- Portrait: duotone, taped down ---------- */
+    .photo {
+      grid-column: 1 / span 5;
+      position: relative;
+      background: #FFFFFF;
+      padding: 1rem 1rem 3rem;
+      transform: rotate(-2.5deg);
+      box-shadow: 6px 8px 0 var(--ink);
+      border: 2px solid var(--ink);
+    }
+
+    .photo img {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: var(--teal);
+      filter: url(#duotone) contrast(1.1);
+    }
+
+    .photo figcaption {
+      position: absolute;
+      left: 1rem;
+      bottom: 0.8rem;
+      font-family: "Special Elite", monospace;
+      font-size: 0.9rem;
+    }
+
+    .tape {
+      position: absolute;
+      width: 110px;
+      height: 32px;
+      background: var(--tape);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+      clip-path: polygon(3% 0, 97% 4%, 100% 50%, 96% 100%, 2% 95%, 0 45%);
+    }
+
+    .tape--tl { top: -14px; left: -30px; transform: rotate(-35deg); }
+    .tape--br { bottom: -10px; right: -26px; transform: rotate(-30deg); background: rgba(0, 166, 166, 0.55); }
+
+    /* ---------- Copy ---------- */
+    .copy {
+      grid-column: 6 / span 7;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .manifesto {
+      font-family: "Special Elite", monospace;
+      font-size: clamp(1.1rem, 2.2vw, 1.4rem);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .manifesto mark {
+      background: linear-gradient(100deg, transparent 2%, rgba(0, 166, 166, 0.45) 4%, rgba(0, 166, 166, 0.45) 96%, transparent 98%);
+      color: inherit;
+      padding: 0 0.15em;
+    }
+
+    .traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .traits li {
+      font-family: "Big Shoulders Stencil Display", Impact, sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.7rem;
+      border: 2px solid var(--ink);
+    }
+
+    .traits li:last-child { background: var(--ink); color: var(--paper); transform: rotate(-3deg); }
+
+    /* ---------- Contact form ---------- */
+    .contact {
+      background: #FFFFFF;
+      border: 2px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--cobalt);
+      padding: clamp(1.25rem, 3vw, 2rem);
+    }
+
+    .contact h2 {
+      font-family: "Big Shoulders Stencil Display", Impact, sans-serif;
+      font-weight: 900;
+      font-size: 2.2rem;
+      line-height: 1;
+      text-transform: uppercase;
+      margin: 0 0 0.4rem;
+    }
+
+    .contact form > p, .thanks p { margin: 0 0 1.25rem; }
+
+    .fields {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .field--wide { grid-column: 1 / -1; }
+
+    label {
+      display: block;
+      font-family: "Special Elite", monospace;
+      font-size: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      font: inherit;
+      color: var(--ink);
+      background: var(--paper);
+      border: 0;
+      border-bottom: 2px solid var(--ink);
+      border-radius: 0;
+      padding: 0.6rem 0.75rem;
+    }
+
+    textarea { resize: vertical; min-height: 6.5rem; }
+
+    input:focus-visible, textarea:focus-visible {
+      outline: 2px dashed var(--cobalt);
+      outline-offset: 2px;
+      background: #FFFFFF;
+    }
+
+    button {
+      margin-top: 1.25rem;
+      font-family: "Big Shoulders Stencil Display", Impact, sans-serif;
+      font-weight: 900;
+      font-size: 1.4rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--paper);
+      background: var(--ink);
+      border: 0;
+      padding: 0.5rem 2rem;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.15s;
+    }
+
+    button:hover { background: var(--cobalt); transform: rotate(-1.5deg); }
+    button:focus-visible { outline: 3px solid var(--teal); outline-offset: 3px; }
+
+    .hp { display: none; }
+
+    .thanks { display: none; }
+    .thanks:target { display: block; }
+    .thanks:target ~ form { display: none; }
+
+    footer {
+      grid-column: 1 / -1;
+      font-family: "Special Elite", monospace;
+      font-size: 0.85rem;
+      border-top: 1px solid var(--ink);
+      padding-top: 0.5rem;
+    }
+
+    @media (max-width: 860px) {
+      .photo, .copy { grid-column: 1 / -1; }
+      .photo { max-width: 420px; justify-self: center; }
+    }
+
+    @media (max-width: 520px) {
+      .fields { grid-template-columns: minmax(0, 1fr); }
+      .header span:nth-child(2) { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Duotone filter: maps dark ink to cobalt and highlights to pale teal. -->
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <filter id="duotone" color-interpolation-filters="sRGB">
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.0 0.80"/>
+        <feFuncG type="table" tableValues="0.20 1.0"/>
+        <feFuncB type="table" tableValues="0.55 0.97"/>
+      </feComponentTransfer>
+    </filter>
+  </svg>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="row"><span>Tiannah's Tiannah's Tiannah's Tiannah's</span><span>Tiannah's Tiannah's Tiannah's Tiannah's</span></div>
+    <div class="row"><span>Tiannah's Tiannah's Tiannah's Tiannah's</span><span>Tiannah's Tiannah's Tiannah's Tiannah's</span></div>
+    <div class="row"><span>Tiannah's Tiannah's Tiannah's Tiannah's</span><span>Tiannah's Tiannah's Tiannah's Tiannah's</span></div>
+    <div class="row"><span>Tiannah's Tiannah's Tiannah's Tiannah's</span><span>Tiannah's Tiannah's Tiannah's Tiannah's</span></div>
+    <div class="row"><span>Tiannah's Tiannah's Tiannah's Tiannah's</span><span>Tiannah's Tiannah's Tiannah's Tiannah's</span></div>
+    <div class="row"><span>Tiannah's Tiannah's Tiannah's Tiannah's</span><span>Tiannah's Tiannah's Tiannah's Tiannah's</span></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="page">
+    <header class="header">
+      <span>Vol. 1 · Issue 1</span>
+      <span>Gold Coast, QLD</span>
+      <span>Est. 2026</span>
+    </header>
+
+    <h1>Tiannah<span>'</span>s</h1>
+
+    <figure class="photo">
+      <span class="tape tape--tl" aria-hidden="true"></span>
+      <picture>
+        <source srcset="../../assets/tiannah.webp" type="image/webp">
+        <img src="../../assets/tiannah.png" alt="Illustrated portrait of Tiannah" width="800" height="800">
+      </picture>
+      <figcaption>T. — the boss.</figcaption>
+      <span class="tape tape--br" aria-hidden="true"></span>
+    </figure>
+
+    <div class="copy">
+      <p class="manifesto">Something new is being built here. <mark>Carefully. Properly.</mark> With a bit of noise. Doors open soon.</p>
+
+      <ul class="traits" aria-label="What to expect">
+        <li>Reliable</li>
+        <li>Hardworking</li>
+        <li>Sharp</li>
+        <li>A bit loud</li>
+      </ul>
+
+      <section class="contact" aria-labelledby="contact-heading">
+        <div id="thanks" class="thanks" role="status">
+          <h2>Message received</h2>
+          <p>Cheers! Tiannah will get back to you soon.</p>
+        </div>
+
+        <form action="https://api.web3forms.com/submit" method="post">
+          <h2 id="contact-heading">Write in</h2>
+          <p>Questions, collabs, or just want the first copy? Leave a note.</p>
+
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+          <input type="hidden" name="subject" value="New message from tiannahs.com">
+          <input type="hidden" name="from_name" value="tiannahs.com">
+          <input type="hidden" name="redirect" value="https://tiannahs.com/#thanks">
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+
+          <div class="fields">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field field--wide">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+          </div>
+          <button type="submit">Send →</button>
+        </form>
+      </section>
+    </div>
+
+    <footer>© 2026 Tiannah's. Printed on the internet.</footer>
+  </main>
+</body>
+</html>

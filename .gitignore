@@ -1,0 +1,32 @@
+# Environment
+.env
+.env.*
+.env.local
+!.env.example
+
+# Node (in case tooling is added later)
+node_modules/
+
+### macOS ###
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Build outputs
+dist/
+.build/
+build/
+.next/
+*.pyc
+
+# Claude local files
+.claude/
+CLAUDE.local.md

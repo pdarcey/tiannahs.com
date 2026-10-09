@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tiannah's — Design options</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cobalt: #0047AB;
+      --teal: #00A6A6;
+      --bg: #0B1226;
+      --card: #141D38;
+      --ink: #EAF1FB;
+      --ink-soft: #9FB0CC;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Inter", system-ui, sans-serif;
+      line-height: 1.5;
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: clamp(1.5rem, 5vw, 3.5rem) clamp(1rem, 4vw, 2.5rem);
+    }
+
+    h1 { font-weight: 800; font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 0.25rem; }
+    .lede { color: var(--ink-soft); margin: 0 0 2.5rem; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .option {
+      position: relative;
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .option:hover, .option:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 2px var(--teal), 0 20px 50px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Live, scaled-down preview: a 1440×900 page shown at 25% scale. */
+    .preview {
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+
+    .preview iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 400%;
+      height: 400%;
+      border: 0;
+      transform: scale(0.25);
+      transform-origin: 0 0;
+      pointer-events: none;
+    }
+
+    .meta { padding: 1rem 1.25rem 1.25rem; }
+    .meta h2 { font-size: 1.15rem; margin: 0 0 0.25rem; }
+    .meta p { color: var(--ink-soft); font-size: 0.92rem; margin: 0; }
+
+    /* The whole card is the link. */
+    .meta a { color: inherit; text-decoration: none; }
+    .meta a::after { content: ""; position: absolute; inset: 0; }
+    .meta a:focus-visible { outline: none; }
+
+    .num { color: var(--teal); margin-right: 0.35rem; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Tiannah's: five holding-page designs</h1>
+    <p class="lede">Click any design to open it full-size. Every page is HTML and CSS only, with no JavaScript. The contact forms aren't connected yet, so please don't send messages through them.</p>
+
+    <ul class="grid">
+      <li class="option">
+        <div class="preview"><iframe src="1-electric-tide/index.html" title="Electric Tide preview" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="meta">
+          <h2><a href="1-electric-tide/index.html"><span class="num">1</span>Electric Tide</a></h2>
+          <p>Calm and sophisticated. Aurora light drifts over deep navy, with a serif title, a scrawled underline and a safety pin.</p>
+        </div>
+      </li>
+      <li class="option">
+        <div class="preview"><iframe src="2-cover-story/index.html" title="Cover Story preview" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="meta">
+          <h2><a href="2-cover-story/index.html"><span class="num">2</span>Cover Story</a></h2>
+          <p>An editorial magazine cover with a drifting halftone, a huge condensed title, a ransom-note sticker and torn paper.</p>
+        </div>
+      </li>
+      <li class="option">
+        <div class="preview"><iframe src="3-swell/index.html" title="Swell preview" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="meta">
+          <h2><a href="3-swell/index.html"><span class="num">3</span>Swell</a></h2>
+          <p>Gold Coast sunrise. Waves roll from teal to cobalt, with an arch-framed portrait and a neon "Open soon" stamp.</p>
+        </div>
+      </li>
+      <li class="option">
+        <div class="preview"><iframe src="4-zine/index.html" title="Zine preview" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="meta">
+          <h2><a href="4-zine/index.html"><span class="num">4</span>Zine</a></h2>
+          <p>The most punk, on a tidy grid. Stencil type, a duotone portrait, tape strips, photocopy grain and scrolling wordmarks.</p>
+        </div>
+      </li>
+      <li class="option">
+        <div class="preview"><iframe src="5-constellation/index.html" title="Constellation preview" loading="lazy" tabindex="-1"></iframe></div>
+        <div class="meta">
+          <h2><a href="5-constellation/index.html"><span class="num">5</span>Constellation</a></h2>
+          <p>Minimal luxury. A slowly drifting network on porcelain, with a fine serif title and a neon-teal studded border.</p>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

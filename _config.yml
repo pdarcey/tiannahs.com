@@ -1,0 +1,5 @@
+# GitHub Pages (Jekyll) settings: keep project notes off the public website.
+exclude:
+  - CLAUDE.md
+  - README.md
+  - Documentation/
