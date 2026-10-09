@@ -307,6 +307,11 @@
       .ransom .word span { font-size: 1.05rem; }
     }
 
+    /* Animated masks repaint full-screen layers every frame; too heavy for phones. */
+    @media (max-width: 900px) {
+      .halftone span { animation-name: none, slide; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
     }

@@ -41,9 +41,12 @@ The architecture is about as simple as it gets, and that's deliberate.
 - **Gotcha: headless Chrome lies about phone widths.** Screenshots at `--window-size=390,…` came out cropped, because headless Chrome on macOS won't make a window narrower than about 500 px. The fix was a test page that holds each design in a 390 px `<iframe>`, which gives a true phone-width viewport. Headless `--screenshot` also never quits on its own, so the helper script kills Chrome once the PNG appears.
 - **Gotcha: `file://` doesn't serve `index.html` for folders.** The gallery's previews showed folder listings until the links pointed at `…/index.html` explicitly.
 
+- **2026-10-09: The gallery that crashed iPhones (Clarity #508).** On Paul's iPhone, scrolling `/designs/` flashed white, then reloaded at the top. That's iOS Safari's tell-tale sign that the page ran out of memory and was killed. The gallery used live `<iframe>` previews, so it was really running all five animated pages at once. Each page had GPU-hungry effects: a `filter: blur(80px)` on blobs larger than the screen, frosted glass, and a grain layer four times the screen's area. At the iPhone's 3× pixel density, every one of those layers costs tens of megabytes. Desktop browsers shrug it off, so headless Chrome never noticed. The fix was still screenshots in the gallery, plus cheaper effects in the designs themselves: blobs drawn with fading `radial-gradient`s instead of a blur filter (same look, a fraction of the memory), grain sized to the screen, and no frosted glass or animated masks on phones. Lesson: a big blur filter is like asking the GPU to paint a mural through frosted glass, sixty times a second.
+
 ## Engineer's Wisdom
 
 - Fit the tool to the lifespan. A holding page should be cheap to build, cheap to host, and easy to throw away.
+- Test on a real phone early. A desktop browser has memory to spare, so it hides problems a phone won't survive.
 
 ## If I Were Starting Over...
 
